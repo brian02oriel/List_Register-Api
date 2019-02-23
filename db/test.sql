@@ -1,24 +1,26 @@
-create database listapi;
+CREATE DATABASE api_db;
 
-use listapi;
+USE api_db;
 
-create table if not exists 'users' (
-    'id' int(10) unsigned not null auto_increment,
-    'username' varchar(50) collate utf8_unicode_ci not null,
-    'email' varchar(200) collate utf8_unicode_ci not null,
-    'password' varchar(100) collate utf8_unicode_ci not null,
-    'created_at' TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    'updated_at' TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY ('id'),
-    UNIQUE_KEY 'users_email_unique' ('email')
-)
+ Create table if not exists users(
+     id int(10) unsigned not null auto_increment,
+     email varchar(100) collate utf8_unicode_ci not null,
+     password varchar(200) collate utf8_unicode_ci not null,
+     created_at timestamp default current_timestamp,
+     updated_at timestamp default current_timestamp on update current_timestamp,
+     primary key(id),
+     unique key users_email_unique (email)
+ ) engine = InnoDB default character set=utf8;
 
-create table if not exists 'products' (
-    'id' int(10) unsigned not null auto_increment,
-    'productname' varchar(100) collate utf8_unicode_ci not null,
-    'expdate' DATE not null DEFAULT CURRENT_DATE,
-    'created_at' TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    'updated_at' TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY ('id')
-)
+ Describe users;
+
+ Create table if not exists products(
+     id int(10) unsigned not null PRIMARY KEY auto_increment,
+     productname varchar(100) collate utf8_unicode_ci not null,
+     exp_date date,
+     created_at timestamp default current_timestamp,
+     updated_at timestamp default current_timestamp on update current_timestamp
+ );
+
+Describe products;
 
