@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 
 //Routes
 require('./routes/userRoutes')(app);
+require('./routes/productRoutes')(app);
 app.listen(app.get('port'), () => {
     console.log("server on port 3000");
 });

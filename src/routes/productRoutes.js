@@ -1,42 +1,38 @@
-const User = require('../models/user');
+const Product = require('../models/product');
 
 module.exports = function (app) {
-    app.get('/', (req, res)=>{
-        res.json([]);
-    });
 
-    app.get('/users', (req, res) =>{
-        User.getUsers((err, data) => {
+    app.get('/products', (req, res) =>{
+        Product.getProducts((err, data) => {
             res.json(data);
         });
     });
 
-    app.post('/users', (req, res) =>{
-        const userData = {
+
+    app.post('/products', (req, res) =>{
+        const productData = {
             id: null,
-            email: req.body.email,
-            password: req.body.password,
+            productname: req.body.productname,
+            exp_date: req.body.exp_date,
             created_at: null,
             updated_at: null
         };
-        
-        User.insertUser(userData, (err, data) =>{
+
+        Product.insertProduct(productData, (err, data) =>{
             if(data && data.insertId){
                 res.json({
                     success: true,
-                    msg: 'User inserted',
+                    msg: 'Product inserted',
                     data: data   
                 })
             } else {
                 res.status(500).json({
                     success: false,
-                    msg: 'Error: Cannot insert user'
+                    msg: 'Error: Cannot insert product'
 
                 })
             }
         })
     })
-
+        
 }
-
-

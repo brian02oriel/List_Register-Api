@@ -1,0 +1,9 @@
+GET http://localhost:3000/products
+
+//POST http://localhost:3000/products
+//content-type: application/json
+
+//{
+//    "productname":"Corn Flake",
+//    "exp_date":"2019-10-10"
+//}

@@ -1,10 +1,10 @@
 const connection = require('./connection');
 
-let userModel = {};
+let productModel = {};
 
-userModel.getUsers = (callback) =>{
+productModel.getProducts = (callback) =>{
     if(connection){
-        connection.query('SELECT * FROM users ORDER BY id', 
+        connection.query('SELECT * FROM products ORDER BY id', 
         (err, rows) => {
             if(err){
                 console.log(err);
@@ -16,9 +16,9 @@ userModel.getUsers = (callback) =>{
     }
 };
 
-userModel.insertUser = (userData, callback) => {
+productModel.insertProduct = (productData, callback) =>{
     if(connection){
-        connection.query('INSERT INTO users SET ?', userData,
+        connection.query('INSERT INTO products SET ?', productData,
         (err, rows) =>{
             if(err){
                 console.log(err);
@@ -31,8 +31,5 @@ userModel.insertUser = (userData, callback) => {
         })
     }
 }
-module.exports = userModel;
 
-        
-       
-
+module.exports = productModel;
