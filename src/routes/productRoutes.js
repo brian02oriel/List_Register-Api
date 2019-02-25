@@ -1,10 +1,21 @@
 const Product = require('../models/product');
-
 module.exports = function (app) {
 
     app.get('/products', (req, res) =>{
-        Product.getProducts((err, data) => {
-            res.json(data);
+        Product.getProducts(req.body.userId, (err, data) => {
+            if(data && data.msg === "success"){
+                res.json({
+                    success: true,
+                    msg: "Showing products",
+                    data:data
+                });
+            } else {
+                res.status(500).json({
+                    success: false,
+                    msg: "This user dont have products"
+                })
+            }
+            
         });
     });
 
@@ -12,6 +23,7 @@ module.exports = function (app) {
     app.post('/products', (req, res) =>{
         const productData = {
             id: null,
+            userId: req.body.userId,
             productname: req.body.productname,
             exp_date: req.body.exp_date,
             created_at: null,

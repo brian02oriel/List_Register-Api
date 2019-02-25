@@ -2,14 +2,20 @@ const connection = require('./connection');
 
 let productModel = {};
 
-productModel.getProducts = (callback) =>{
+productModel.getProducts = (userId, callback) =>{
     if(connection){
-        connection.query('SELECT * FROM products ORDER BY id', 
+        let query = "SELECT products.id, productname, exp_date FROM products " + 
+        "INNER JOIN users on userId = users.id " +
+         "WHERE userId = "+ connection.escape(userId) + " ORDER BY products.id"
+        connection.query( query, 
         (err, rows) => {
             if(err){
                 console.log(err);
             } else {
-                callback(null, rows);
+                callback(null, {
+                    msg:"success",
+                    data: rows
+                });
                 }
             }
         )
@@ -25,7 +31,7 @@ productModel.insertProduct = (productData, callback) =>{
             } else {
                 callback(null, {
                     'insertId': rows.insertId
-                })
+                });
             }
             
         })

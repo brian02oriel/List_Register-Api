@@ -1,11 +1,17 @@
 GET http://localhost:3000/products
+content-type: application/json
+
+{
+    "userId": "2"
+}
 
 POST http://localhost:3000/products
 content-type: application/json
 
 {
-    "productname":"Cookies",
-    "exp_date":"2019-5-10"
+    "userId":"2",
+    "productname":"Yogurt",
+    "exp_date":"2019-5-5"
 }
 
 PUT http://localhost:3000/products/1
@@ -16,4 +22,4 @@ content-type: application/json
     "exp_date":"2019-10-10"
 }
 
-DELETE http://localhost:3000/products/2
+DELETE http://localhost:3000/products/3
