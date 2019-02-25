@@ -16,4 +16,4 @@ content-type: application/json
     "password":"987654321"
 }
 
-DELETE http://localhost:3000/users/4
+DELETE http://localhost:3000/users/5

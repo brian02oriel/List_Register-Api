@@ -64,10 +64,9 @@ module.exports = function (app) {
     })
 
     app.delete('/users/:id', (req, res) =>{
-        userData = req.params.id;
-        User.deleteUser(userData, (err, data) =>{
+        User.deleteUser(req.params.id, (err, data) =>{
             
-            if(data && data.msg){
+            if(data && data.msg === "success"){
                 res.json({
                     success: true,
                     msg: 'User deleted',
@@ -76,7 +75,7 @@ module.exports = function (app) {
             } else {
                 res.status(500).json({
                     success: false,
-                    msg: 'Error: Cannot delete user'
+                    msg: 'Error: This user dont exist'
 
                 })
             }

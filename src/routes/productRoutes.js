@@ -62,10 +62,9 @@ module.exports = function (app) {
     })
 
     app.delete('/products/:id', (req, res) =>{
-        productData = req.params.id;
-        Product.deleteProduct(productData, (err, data) =>{
+        Product.deleteProduct(req.params.id, (err, data) =>{
             
-            if(data && data.msg){
+            if(data && data.msg === "success"){
                 res.json({
                     success: true,
                     msg: 'Product deleted',

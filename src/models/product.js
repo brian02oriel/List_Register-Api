@@ -51,18 +51,29 @@ productModel.updateProduct = (productData, callback) => {
     }
 }
 
-productModel.deleteProduct = (productData, callback) => {
+productModel.deleteProduct = (productId, callback) => {
     if(connection){
-        const query = "DELETE FROM products WHERE id = " + connection.escape(productData) + " ;"
-        
-         connection.query(query, (err, rows) =>{
-            if(err){
-                console.log(err);
-            } else {
+        let query = "SELECT * FROM products WHERE id = " + connection.escape(productId) + " ;"
+        connection.query(query, (err, row) =>{
+            if(row.length !== 0){
+                let query = "DELETE FROM products WHERE id = " + connection.escape(productId) + " ;"
+                connection.query(query, (err, row) =>{
+                    if(err){
+                        console.log(err);
+                    } else {
+                        callback(null, {
+                            "msg": "success"
+                        });
+                    }
+                }) 
+            } else{
                 callback(null, {
-                    "msg": "success"
-                });
+                    "msg": "This product dont exist"
+                })
             }
+       
+        
+         
         });
     }
 }

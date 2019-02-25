@@ -51,18 +51,29 @@ userModel.updateUser = (userData, callback) => {
     }
 }
 
-userModel.deleteUser = (userData, callback) => {
+userModel.deleteUser = (userId, callback) => {
     if(connection){
-        const query = "DELETE FROM users WHERE id = " + connection.escape(userData) + " ;"
-        
-         connection.query(query, (err, rows) =>{
-            if(err){
-                console.log(err);
-            } else {
+        let query = "SELECT * FROM users WHERE id = " + connection.escape(userId) + " ;"
+        connection.query(query, (err, row) =>{
+            if(row.length !== 0){
+                let query = "DELETE FROM users WHERE id = " + connection.escape(userId) + " ;"
+                connection.query(query, (err, row) =>{
+                    if(err){
+                        console.log(err);
+                    } else {
+                        callback(null, {
+                            "msg": "success"
+                        });
+                    }
+                }) 
+            } else{
                 callback(null, {
-                    "msg": "success"
-                });
+                    "msg": "This user dont exist"
+                })
             }
+       
+        
+         
         });
     }
 }
